@@ -7,11 +7,13 @@
     "dev": "tsx src/server.ts"
   },
   "dependencies": {
+    "@prisma/client": "^4.11.0",
     "axios": "^1.3.4",
     "config": "^3.3.9",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "prisma": "^4.11.0",
     "qs": "^6.11.1"
   },
   "devDependencies": {

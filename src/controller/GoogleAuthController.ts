@@ -11,13 +11,15 @@ export class GoogleAuthController {
   ) {
     try {
       const code = request.query.code as string;
-
+      const queryState = request.query.state as string 
+      const isCompanyLogin = queryState.split('type=')?.[1] === 'company'
+      
       if (!code) {
         return next(new Error('Authorization code not provided!'));
       }
   
       const googleAuthService = new GoogleAuthService()
-      await googleAuthService.execute(code)
+      await googleAuthService.execute(code, isCompanyLogin)
       
       response.redirect('http://www.localhost:3000')
     } catch (error) {

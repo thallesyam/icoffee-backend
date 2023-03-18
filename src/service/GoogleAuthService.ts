@@ -4,7 +4,8 @@ export class GoogleAuthService {
   constructor() {}
 
   async execute(  
-    code: string
+    code: string,
+    isCompanyLogin = false
   ) {
     const { id_token, access_token } = await getGoogleOauthToken({ code });
 
@@ -17,7 +18,8 @@ export class GoogleAuthService {
       name,
       verified_email,
       email,
-      picture
+      picture,
+      isCompanyLogin
     });
       
     return 'ok'
