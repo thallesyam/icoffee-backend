@@ -13,7 +13,7 @@ export class GetUserByEmailController {
       const { email } = request.params
 
       if (!email) {
-        return next(new Error('User is not provider'));
+        return next(new Error('User is not provide'));
       }
   
       const getUserByEmailService = new GetUserByEmailService()

@@ -13,7 +13,7 @@ export class DeleteUserController {
       const { id } = request.params
 
       if (!id) {
-        return next(new Error('User is not provider'));
+        return next(new Error('User is not provide'));
       }
   
       const deleteUserService = new DeleteUserService()

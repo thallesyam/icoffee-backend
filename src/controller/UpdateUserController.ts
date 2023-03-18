@@ -13,7 +13,7 @@ export class UpdateUserController {
       const user = request.body
 
       if (!user.name || !user.email || !user.id) {
-        return next(new Error('User is not provider'));
+        return next(new Error('User is not provide'));
       }
   
       const updateUserService = new UpdateUserService()
