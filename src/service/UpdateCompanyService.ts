@@ -17,7 +17,7 @@ export class UpdateCompanyService {
       return new Error('Company not found')
     }
 
-    const userUpdated = await prisma.company.update({
+    const companyUpdated = await prisma.company.update({
       where: {
         id: companyExists.id
       },
@@ -26,7 +26,7 @@ export class UpdateCompanyService {
       }
     })
 
-    return userUpdated
+    return companyUpdated
   }
 }
 
