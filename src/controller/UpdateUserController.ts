@@ -28,7 +28,7 @@ export class UpdateUserController {
       response.json({user: userUpdated})
     } catch (error) {
       console.log('Failed to update User', error);
-      return response.redirect(`http://www.localhost:3000`);
+      return response.redirect(`https://icoffe-front-g1r6.vercel.app/`);
     }
   }
 }
