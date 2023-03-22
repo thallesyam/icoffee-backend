@@ -14,6 +14,7 @@ import { UpdateProductController } from './controller/UpdateProductController';
 import { DeleteProductController } from './controller/DeleteProductController';
 import { GetProductByCompanyController } from './controller/GetProductByCompanyController';
 import { GetProductsController } from './controller/GetProductsController';
+import { GetProductByIdController } from './controller/GetProductByIdController';
 
 const routes = express.Router();
 
@@ -34,7 +35,8 @@ routes.delete('/company/:id', new DeleteCompanyController().handle)
 routes.post('/product', new CreateProductController().handle)
 routes.put('/product', new UpdateProductController().handle)
 routes.delete('/product/:id', new DeleteProductController().handle)
-routes.get('/product/:ownerId', new GetProductByCompanyController().handle)
+routes.get('/product/:id', new GetProductByIdController().handle)
+routes.get('/product/company/:ownerId', new GetProductByCompanyController().handle)
 routes.get('/products', new GetProductsController().handle)
 
 

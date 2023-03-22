@@ -16,10 +16,21 @@ export class DeleteCompanyService {
       return new Error('Company not found')
     }
 
+    await prisma.company.update({
+      data: {
+        Product: {
+          deleteMany: {}
+        }
+      },
+      where: {
+        id
+      },
+    })
+
     await prisma.company.delete({
       where: {
         id
-      }
+      },
     })
 
     return

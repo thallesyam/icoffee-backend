@@ -23,7 +23,7 @@ export class UpdateCompanyController {
         response.status(500).json({ message: 'Error' })
         return
       }
-
+      response.cookie('@icoffee:user', JSON.stringify(companyUpdated))
       response.json({company: companyUpdated})
     } catch (error) {
       console.log('Failed to update Company', error);

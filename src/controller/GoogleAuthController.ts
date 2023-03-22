@@ -19,12 +19,13 @@ export class GoogleAuthController {
       }
   
       const googleAuthService = new GoogleAuthService()
-      await googleAuthService.execute(code, isCompanyLogin)
-      
-      response.redirect('http://www.localhost:3000')
+      const user = await googleAuthService.execute(code, isCompanyLogin)
+
+      response.cookie('@icoffee:user', JSON.stringify(user))
+      response.redirect('http://localhost:3000')
     } catch (error) {
       console.log('Failed to authorize Google User', error);
-      return response.redirect(`http://www.localhost:3000`);
+      return response.redirect(`http://localhost:3000`);
     }
   }
 }
