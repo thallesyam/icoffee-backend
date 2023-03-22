@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from "express";
-import { GetProductByCompanyService } from "../service/GetProductByCompanyService";
 import { GetProductByIdService } from "../service/GetProductByIdService";
 
 export class GetProductByIdController {
