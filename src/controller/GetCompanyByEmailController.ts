@@ -27,7 +27,7 @@ export class GetCompanyByEmailController {
       response.json({company})
     } catch (error) {
       console.log('Failed to update Company', error);
-      return response.redirect(`https://icoffe-front-g1r6.vercel.app/`);
+      return response.redirect(`https://icoffe-front.vercel.app/`);
     }
   }
 }

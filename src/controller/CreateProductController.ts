@@ -34,7 +34,7 @@ export class CreateProductController {
       response.json({product: 'Produto criado com sucesso!' })
     } catch (error) {
       console.log('Failed to create Product', error);
-      return response.redirect(`https://icoffe-front-g1r6.vercel.app/`);
+      return response.redirect(`https://icoffe-front.vercel.app/`);
     }
   }
 }

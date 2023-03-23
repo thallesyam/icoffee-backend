@@ -27,7 +27,7 @@ export class GetProductByCompanyController {
       response.json({product})
     } catch (error) {
       console.log('Failed to get Product', error);
-      return response.redirect(`https://icoffe-front-g1r6.vercel.app/`);
+      return response.redirect(`https://icoffe-front.vercel.app/`);
     }
   }
 }
