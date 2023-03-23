@@ -27,7 +27,7 @@ export class DeleteProductController {
       response.json({ message: 'Produto deletado' })
     } catch (error) {
       console.log('Failed to update Product', error);
-      return response.redirect(`https://icoffe-front.vercel.app/`);
+      return response.redirect(`https://icoffe-front.vercel.app`);
     }
   }
 }

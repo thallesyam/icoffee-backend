@@ -27,7 +27,7 @@ export class DeleteCompanyController {
       response.json({ message: 'Companhia deletado' })
     } catch (error) {
       console.log('Failed to update Company', error);
-      return response.redirect(`https://icoffe-front.vercel.app/`);
+      return response.redirect(`https://icoffe-front.vercel.app`);
     }
   }
 }
