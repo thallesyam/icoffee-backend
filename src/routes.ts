@@ -19,13 +19,7 @@ import { GetProductByIdController } from "./controller/GetProductByIdController"
 const routes = express.Router()
 
 // Rota de login do google e responsável pela primeira criação de usuário ou empresa no banco
-routes.get(
-  "/api/auth/google/callback",
-  new GoogleAuthController().handle,
-  (req, res) => {
-    console.log("DEBUG", req)
-  }
-)
+routes.get("/api/auth/google/callback", new GoogleAuthController().handle)
 
 // User
 routes.put("/user", new UpdateUserController().handle)

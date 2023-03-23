@@ -9,7 +9,7 @@ export class GetProductByCompanyController {
       const { ownerId } = request.params
 
       if (!ownerId) {
-        return next(new Error("Product is not provide"))
+        return next(new Error("Product is not Provided"))
       }
 
       const getProductByCompanyService = new GetProductByCompanyService()

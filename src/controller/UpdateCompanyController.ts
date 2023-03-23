@@ -9,7 +9,7 @@ export class UpdateCompanyController {
       const company = request.body
 
       if (!company.ownerName || !company.ownerEmail || !company.id) {
-        return next(new Error("Company is not provide"))
+        return next(new Error("Company is not Provided"))
       }
 
       const updateCompanyService = new UpdateCompanyService()

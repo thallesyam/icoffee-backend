@@ -18,7 +18,7 @@ export class UpdateProductController {
         !ownerId ||
         !price
       ) {
-        return next(new Error("Product is not provide"))
+        return next(new Error("Product is not Provided"))
       }
 
       const updateProductService = new UpdateProductService()

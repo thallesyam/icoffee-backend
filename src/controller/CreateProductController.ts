@@ -9,7 +9,7 @@ export class CreateProductController {
       const { imageUrl, name, description, ownerId, price } = request.body
 
       if (!imageUrl || !name || !description || !ownerId || !price) {
-        return next(new Error("Product is not provide"))
+        return next(new Error("Product is not Provided"))
       }
 
       const createProductService = new CreateProductService()

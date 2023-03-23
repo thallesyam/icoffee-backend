@@ -9,7 +9,7 @@ export class DeleteCompanyController {
       const { id } = request.params
 
       if (!id) {
-        return next(new Error("Company is not provide"))
+        return next(new Error("Company is not Provided"))
       }
 
       const deleteCompanyService = new DeleteCompanyService()

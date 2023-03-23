@@ -9,7 +9,7 @@ export class GetCompanyByEmailController {
       const { ownerEmail } = request.params
 
       if (!ownerEmail) {
-        return next(new Error("Company is not provide"))
+        return next(new Error("Company is not Provided"))
       }
 
       const getCompanyByEmailService = new GetCompanyByEmailService()

@@ -9,7 +9,7 @@ export class UpdateUserController {
       const user = request.body
 
       if (!user.name || !user.email || !user.id) {
-        return next(new Error("User is not provide"))
+        return next(new Error("User is not Provided"))
       }
 
       const updateUserService = new UpdateUserService()
