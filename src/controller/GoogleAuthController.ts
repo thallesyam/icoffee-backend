@@ -22,10 +22,10 @@ export class GoogleAuthController {
       const user = await googleAuthService.execute(code, isCompanyLogin)
 
       response.cookie('@icoffee:user', JSON.stringify(user))
-      response.redirect('http://localhost:3000')
+      response.redirect('https://icoffe-front.vercel.app/')
     } catch (error) {
       console.log('Failed to authorize Google User', error);
-      return response.redirect(`http://localhost:3000`);
+      return response.redirect(`https://icoffe-front.vercel.app/`);
     }
   }
 }
