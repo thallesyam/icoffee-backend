@@ -20,7 +20,9 @@ export class UpdateCompanyController {
         return
       }
       response
-        .cookie("@icoffee:user", JSON.stringify(companyUpdated))
+        .cookie("@icoffee:user", JSON.stringify(companyUpdated), {
+          httpOnly: false,
+        })
         .json({ company: companyUpdated })
     } catch (error) {
       console.log("Failed to update Company", error)

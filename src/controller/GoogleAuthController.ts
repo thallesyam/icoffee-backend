@@ -18,7 +18,9 @@ export class GoogleAuthController {
       const user = await googleAuthService.execute(code, isCompanyLogin)
 
       response
-        .cookie("@icoffee:user", JSON.stringify(user))
+        .cookie("@icoffee:user", JSON.stringify(user), {
+          httpOnly: false,
+        })
         .redirect(process.env.REDIRECT_URL as string)
     } catch (error) {
       console.log("Failed to authorize Google User", error)

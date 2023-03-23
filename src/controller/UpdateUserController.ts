@@ -21,7 +21,9 @@ export class UpdateUserController {
       }
 
       response
-        .cookie("@icoffee:user", JSON.stringify(userUpdated))
+        .cookie("@icoffee:user", JSON.stringify(userUpdated), {
+          httpOnly: false,
+        })
         .json({ user: userUpdated })
     } catch (error) {
       console.log("Failed to update User", error)
