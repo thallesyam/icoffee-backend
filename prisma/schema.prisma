@@ -17,7 +17,6 @@ model User {
   phone     String?
   cpf       String?
   createdAt DateTime @default(now())
-  Order     Order[]
 }
 
 model Company {
@@ -46,17 +45,4 @@ model Product {
 
   company   Company @relation(fields: [companyId], references: [id])
   companyId String
-  Order     Order[]
-}
-
-model Order {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  total     Float
-
-  user   User   @relation(fields: [userId], references: [id])
-  userId String
-
-  product   Product @relation(fields: [productId], references: [id])
-  productId String
 }
