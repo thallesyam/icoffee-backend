@@ -23,6 +23,8 @@ export class UpdateCompanyController {
         .cookie("@icoffee:user", JSON.stringify(companyUpdated), {
           expires: new Date(Date.now() + 9999999),
           secure: true,
+          sameSite: "none",
+          httpOnly: false,
         })
         .json({ company: companyUpdated })
     } catch (error) {

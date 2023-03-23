@@ -24,6 +24,8 @@ export class UpdateUserController {
         .cookie("@icoffee:user", JSON.stringify(userUpdated), {
           expires: new Date(Date.now() + 9999999),
           secure: true,
+          sameSite: "none",
+          httpOnly: false,
         })
         .json({ user: userUpdated })
     } catch (error) {
