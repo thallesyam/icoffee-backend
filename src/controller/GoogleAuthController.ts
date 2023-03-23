@@ -20,6 +20,8 @@ export class GoogleAuthController {
       response
         .cookie("@icoffee:user", JSON.stringify(user), {
           httpOnly: false,
+          sameSite: "none",
+          secure: true,
         })
         .redirect(process.env.REDIRECT_URL as string)
     } catch (error) {
