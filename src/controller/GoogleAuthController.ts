@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express"
 import { GoogleAuthService } from "../service/GoogleAuthService"
-
+import nookies from "nookies"
 export class GoogleAuthController {
   constructor() {}
 
@@ -17,6 +17,11 @@ export class GoogleAuthController {
       const googleAuthService = new GoogleAuthService()
       const user = await googleAuthService.execute(code, isCompanyLogin)
 
+      nookies.set(null, "myCookie", "myValue", {
+        maxAge: 3600,
+        httpOnly: true,
+        sameSite: "none",
+      })
       response
         .cookie("@icoffee:user", JSON.stringify(user), {
           httpOnly: false,
