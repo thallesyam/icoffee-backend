@@ -21,6 +21,8 @@ export class GoogleAuthController {
         .cookie("@icoffee:user", JSON.stringify(user), {
           expires: new Date(Date.now() + 9999999),
           secure: true,
+          sameSite: "none",
+          httpOnly: false,
         })
         .redirect("https://icoffe-front.vercel.app")
     } catch (error) {
