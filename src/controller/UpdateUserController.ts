@@ -30,7 +30,7 @@ export class UpdateUserController {
         .json({ user: userUpdated })
     } catch (error) {
       console.log("Failed to update User", error)
-      return response.redirect(`https://icoffe-front.vercel.app`)
+      return response.redirect(process.env.REDIRECT_URL as string)
     }
   }
 }

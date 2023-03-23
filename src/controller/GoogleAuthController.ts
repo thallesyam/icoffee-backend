@@ -24,10 +24,10 @@ export class GoogleAuthController {
           sameSite: "none",
           httpOnly: false,
         })
-        .redirect("https://icoffe-front.vercel.app")
+        .redirect(process.env.REDIRECT_URL as string)
     } catch (error) {
       console.log("Failed to authorize Google User", error)
-      return response.redirect(`https://icoffe-front.vercel.app`)
+      return response.redirect(process.env.REDIRECT_URL as string)
     }
   }
 }
