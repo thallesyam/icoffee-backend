@@ -21,8 +21,7 @@ export class GoogleAuthController {
       const googleAuthService = new GoogleAuthService()
       const user = await googleAuthService.execute(code, isCompanyLogin)
 
-      response.cookie('@icoffee:user', JSON.stringify(user))
-      response.redirect('https://icoffe-front.vercel.app/')
+      response.cookie('@icoffee:user', JSON.stringify(user)).redirect('https://icoffe-front.vercel.app/')
     } catch (error) {
       console.log('Failed to authorize Google User', error);
       return response.redirect(`https://icoffe-front.vercel.app/`);

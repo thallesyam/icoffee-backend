@@ -24,8 +24,7 @@ export class UpdateUserController {
         return
       }
 
-      response.cookie('@icoffee:user', JSON.stringify(userUpdated))
-      response.json({user: userUpdated})
+      response.cookie('@icoffee:user', JSON.stringify(userUpdated)).json({user: userUpdated})
     } catch (error) {
       console.log('Failed to update User', error);
       return response.redirect(`https://icoffe-front.vercel.app/`);
