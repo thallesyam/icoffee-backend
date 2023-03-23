@@ -23,7 +23,10 @@ export class UpdateCompanyController {
         response.status(500).json({ message: 'Error' })
         return
       }
-      response.cookie('@icoffee:user', JSON.stringify(companyUpdated)).json({company: companyUpdated})
+      response.cookie('@icoffee:user', JSON.stringify(companyUpdated), {
+        expires  : new Date(Date.now() + 9999999),
+        httpOnly : false
+      }).json({company: companyUpdated})
     } catch (error) {
       console.log('Failed to update Company', error);
       return response.redirect(`https://icoffe-front.vercel.app`);
