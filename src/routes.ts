@@ -1,4 +1,5 @@
 import express from "express"
+import passport from "passport"
 
 import { GoogleAuthController } from "./controller/GoogleAuthController"
 
@@ -19,7 +20,24 @@ import { GetProductByIdController } from "./controller/GetProductByIdController"
 const routes = express.Router()
 
 // Rota de login do google e responsável pela primeira criação de usuário ou empresa no banco
-routes.get("/api/auth/google/callback", new GoogleAuthController().handle)
+
+routes.get("/auth/google", (request, response, next) => {
+  const query = request.query
+
+  const authenticator = passport.authenticate("google", {
+    scope: ["profile", "email"],
+    state: query ? JSON.stringify(query.type) : undefined,
+  })
+  authenticator(request, response, next)
+})
+
+routes.get(
+  "/api/auth/google/callback",
+  passport.authenticate("google", {
+    scope: ["profile", "email"],
+  }),
+  new GoogleAuthController().handle
+)
 
 // User
 routes.put("/user", new UpdateUserController().handle)

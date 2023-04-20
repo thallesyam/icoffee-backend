@@ -1,53 +1,53 @@
-import { prisma } from "../server";
-import { getGoogleOauthToken, getGoogleUser } from "../utils/session";
+import { prisma } from "../server"
 
+type UserProps = {
+  sub: string
+  name: string
+  given_name: string
+  family_name: string
+  picture: string
+  email: string
+  email_verified: boolean
+  locale: string
+}
 export class GoogleAuthService {
   constructor() {}
 
-  async execute(  
-    code: string,
-    isCompanyLogin = false
-  ) {
-    const { id_token, access_token } = await getGoogleOauthToken({ code });
+  async execute(user: UserProps, isCompanyLogin = false) {
+    const { name, email } = user
 
-    const { name, email } = await getGoogleUser({
-      id_token,
-      access_token,
-    });
-
-    if(isCompanyLogin) {
+    if (isCompanyLogin) {
       const company = await prisma.company.upsert({
         where: {
-          ownerEmail: email
+          ownerEmail: email,
         },
         update: {
           ownerEmail: email,
-          ownerName: name 
+          ownerName: name,
         },
         create: {
           ownerEmail: email,
-          ownerName: name
-        }
+          ownerName: name,
+        },
       })
 
       return company
     }
 
-    const user = await prisma.user.upsert({
+    const userPrisma = await prisma.user.upsert({
       where: {
-        email: email
+        email: email,
       },
       update: {
         email,
-        name 
+        name,
       },
       create: {
         email,
-        name
-      }
+        name,
+      },
     })
 
-    return user
+    return userPrisma
   }
 }
-
