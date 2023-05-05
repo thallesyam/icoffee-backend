@@ -18,9 +18,8 @@ type ProductProps = {
 export class PaymentService {
   constructor() {}
 
-  async execute({ cartItems, total }: ProductProps) {
+  async execute({ cartItems }: ProductProps) {
     const cartItemsIds = cartItems.map((item) => item.productId)
-    console.log(cartItems)
 
     const products = await prisma.product.findMany({
       where: {
