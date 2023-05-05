@@ -20,33 +20,47 @@ export class PaymentWebhookService {
       expand: ["line_items.data.price.product", "customer"],
     })
 
-    const line_items = session.line_items?.data?.[0]
+    const line_items_ids = session.line_items?.data.map(
+      (item) => (item.price?.product as Stripe.Product).metadata.productId
+    )
     const customer = session.customer_details
 
-    if (!line_items) {
+    if (!line_items_ids) {
       return new Error("Items not found")
     }
 
-    const product = await prisma.product.findUnique({
+    const products = await prisma.product.findMany({
       where: {
-        id: (line_items.price?.product as Stripe.Product).metadata.productId,
+        id: { in: line_items_ids },
       },
     })
 
-    if (!product) {
+    if (!products) {
       return new Error("Product not found")
     }
 
+    const productIds = products.map((product) => ({ id: product.id }))
     const order = await prisma.order.create({
       data: {
         checkoutId: session.id,
         clientEmail: customer?.email ?? "",
         clientName: customer?.name ?? "",
-        quantity: line_items.quantity as number,
         total: session.amount_total as number,
-        productId: product.id,
+        products: {
+          connect: productIds,
+        },
       },
     })
+
+    for (const product of products) {
+      await prisma.orderProduct.create({
+        data: {
+          orderId: order.id,
+          checkoutId: session.id,
+          productId: product.id,
+        },
+      })
+    }
 
     return order
   }

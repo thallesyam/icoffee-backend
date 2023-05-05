@@ -18,6 +18,7 @@ import { GetProductsController } from "./controller/GetProductsController"
 import { GetProductByIdController } from "./controller/GetProductByIdController"
 import { PaymentController } from "./controller/PaymentController"
 import { PaymentWebhookController } from "./controller/PaymentWebhookController"
+import { GetSessionByIdController } from "./controller/GetSessionByIdController"
 
 const routes = express.Router()
 
@@ -61,6 +62,8 @@ routes.get(
   new GetProductByCompanyController().handle
 )
 routes.get("/products", new GetProductsController().handle)
+
+routes.get("/session/:checkoutId", new GetSessionByIdController().handle)
 
 routes.post("/payment", new PaymentController().handle)
 routes.post("/payment/webhook", new PaymentWebhookController().handle)

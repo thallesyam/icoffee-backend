@@ -52,8 +52,8 @@ export class PaymentService {
       payment_method_types: ["card"],
       mode: "payment",
       line_items,
-      success_url: `${process.env.REDIRECT_URL}/payment/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.REDIRECT_URL}/payment/error?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${process.env.REDIRECT_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${process.env.REDIRECT_URL}/error?session_id={CHECKOUT_SESSION_ID}`,
     }
 
     const checkout: Stripe.Checkout.Session =
