@@ -16,6 +16,8 @@ import { DeleteProductController } from "./controller/DeleteProductController"
 import { GetProductByCompanyController } from "./controller/GetProductByCompanyController"
 import { GetProductsController } from "./controller/GetProductsController"
 import { GetProductByIdController } from "./controller/GetProductByIdController"
+import { PaymentController } from "./controller/PaymentController"
+import { PaymentWebhookController } from "./controller/PaymentWebhookController"
 
 const routes = express.Router()
 
@@ -59,5 +61,8 @@ routes.get(
   new GetProductByCompanyController().handle
 )
 routes.get("/products", new GetProductsController().handle)
+
+routes.post("/payment", new PaymentController().handle)
+routes.post("/payment/webhook", new PaymentWebhookController().handle)
 
 export { routes }

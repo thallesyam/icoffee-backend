@@ -35,6 +35,22 @@ model Company {
   Product             Product[]
 }
 
+model Order {
+  id         String @id @default(uuid())
+  checkoutId String
+  productId  String
+
+  clientName  String
+  clientEmail String
+
+  product Product @relation(fields: [productId], references: [id])
+
+  quantity Int
+  total    Float
+
+  createdAt DateTime @default(now())
+}
+
 model Product {
   id          String   @id @default(uuid())
   imageUrl    String
@@ -45,4 +61,5 @@ model Product {
 
   company   Company @relation(fields: [companyId], references: [id])
   companyId String
+  Order     Order[]
 }
