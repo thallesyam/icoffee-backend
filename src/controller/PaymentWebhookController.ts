@@ -9,7 +9,7 @@ export class PaymentWebhookController {
       const event = request.body
 
       if (event.type !== "checkout.session.completed") {
-        return
+        return response.send()
       }
 
       const paymentWebhookService = new PaymentWebhookService()
