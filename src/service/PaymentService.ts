@@ -3,6 +3,16 @@ import { prisma } from "../server"
 import { formatAmountForStripe } from "../utils/formatAmountForStripe"
 import { stripe } from "../utils/stripe"
 
+export type Address = {
+  cep: number
+  street: string
+  number: string
+  complement: string
+  neighborhood: string
+  city: string
+  uf: string
+}
+
 type ProductProps = {
   cartItems: {
     quantity: number
@@ -13,12 +23,13 @@ type ProductProps = {
     imageUrl: string
   }[]
   total: number
+  address: Address
 }
 
 export class PaymentService {
   constructor() {}
 
-  async execute({ cartItems }: ProductProps) {
+  async execute({ cartItems, address }: ProductProps) {
     const cartItemsIds = cartItems.map((item) => item.productId)
 
     const products = await prisma.product.findMany({
@@ -42,6 +53,7 @@ export class PaymentService {
             images: [item.imageUrl],
             metadata: {
               productId: item.productId,
+              address: `${address.street} - ${address.neighborhood} - ${address.number}`,
             },
           },
         },

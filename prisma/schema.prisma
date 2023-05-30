@@ -41,6 +41,7 @@ model Order {
   clientName  String
   clientEmail String
   total       Float
+  address     String
   createdAt   DateTime @default(now())
 
   products     Product[]      @relation("OrderProduct")

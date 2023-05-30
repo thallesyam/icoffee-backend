@@ -6,7 +6,7 @@ export class PaymentController {
 
   async handle(request: Request, response: Response, next: NextFunction) {
     try {
-      const { cartItems, total } = request.body
+      const { cartItems, total, address } = request.body
 
       if (!cartItems || !total) {
         return next(new Error("Error on process payment"))
@@ -16,6 +16,7 @@ export class PaymentController {
       const checkoutId = await paymentService.execute({
         cartItems,
         total,
+        address,
       })
 
       if (checkoutId instanceof Error) {

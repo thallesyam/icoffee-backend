@@ -1,6 +1,7 @@
 import { prisma } from "../server"
 import { stripe } from "../utils/stripe"
 import Stripe from "stripe"
+import { Address } from "./PaymentService"
 
 type PaymentWebhookProps = {
   event: {
@@ -22,6 +23,11 @@ export class PaymentWebhookService {
 
     const line_items_ids = session.line_items?.data.map(
       (item) => (item.price?.product as Stripe.Product).metadata.productId
+    )
+    const address = session.line_items?.data.map(
+      (item) =>
+        (item.price?.product as Stripe.Product).metadata
+          .address as unknown as Address
     )
     const customer = session.customer_details
 
@@ -46,6 +52,7 @@ export class PaymentWebhookService {
         clientEmail: customer?.email ?? "",
         clientName: customer?.name ?? "",
         total: session.amount_total as number,
+        address: `${address?.[0]}`,
         products: {
           connect: productIds,
         },
