@@ -41,12 +41,14 @@ export class PaymentService {
     if (!products.length) {
       return new Error("Product not found")
     }
+
     const line_items = cartItems.map((item) => {
       return {
         quantity: item.quantity,
         price_data: {
           unit_amount: formatAmountForStripe(item.unitPrice, "brl"),
           currency: "BRL",
+
           product_data: {
             name: item.name,
             description: item.description,
@@ -64,6 +66,31 @@ export class PaymentService {
       payment_method_types: ["card"],
       mode: "payment",
       line_items,
+      shipping_address_collection: {
+        allowed_countries: ["BR"],
+      },
+      shipping_options: [
+        {
+          shipping_rate_data: {
+            type: "fixed_amount",
+            fixed_amount: {
+              amount: formatAmountForStripe(5, "brl"),
+              currency: "brl",
+            },
+            display_name: "Entrega padrão",
+            delivery_estimate: {
+              minimum: {
+                unit: "hour",
+                value: 1,
+              },
+              maximum: {
+                unit: "hour",
+                value: 2,
+              },
+            },
+          },
+        },
+      ],
       success_url: `${process.env.REDIRECT_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.REDIRECT_URL}/error?session_id={CHECKOUT_SESSION_ID}`,
     }
